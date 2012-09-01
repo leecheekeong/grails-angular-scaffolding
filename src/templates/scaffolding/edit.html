@@ -2,7 +2,6 @@
 <div class="page-header">
 	<h1>Edit ${className}</h1>
 </div>
-<alert level="{{message.level}}" text="{{message.text}}"/>
 <form name="form" data-ng-submit="update(item)" class="form-horizontal">
 	<input type="hidden" data-ng-model="item.id">
 	<input type="hidden" data-ng-model="item.version">
@@ -38,12 +37,16 @@
 			display = (cp ? cp.display : true)
 			required = (cp ? !(cp.propertyType in [boolean, Boolean]) && !cp.nullable && (cp.propertyType != String || !cp.blank) : false)
 		}
+		
+		String requiredStr = ""
+		if (required) requiredStr = "required"
+		
 		if (display) { %>
-	<div class="control-group" data-ng-class="{error: errors.${prefix}${p.name}}">
+	<div class="control-group">
 		<label class="control-label" for="${prefix}${p.name}">${p.naturalName}</label>
 		<div class="controls">
-			<input type="text" id="${prefix}${p.name}" name="${prefix}${p.name}" required data-ng-model="item.${prefix}${p.name}">
-			<span class="help-inline" data-ng-show="errors.${prefix}${p.name}">{{errors.${prefix}${p.name}}}</span>
+			<input type="text" id="${prefix}${p.name}" name="${prefix}${p.name}" ${requiredStr} data-ng-model="item.${prefix}${p.name}">
+			<span class="help-inline">{{errors.${prefix}${p.name}}}</span>
 		</div>
 	</div>
 	<%  }   } %>

@@ -74,7 +74,7 @@ class AngularTemplateGenerator extends DefaultGrailsTemplateGenerator {
 			generateView domainClass, t, new File(destdir).absolutePath
 		}
 	}
-
+	
 	@Override
 	void generateView(GrailsDomainClass domainClass, String viewName, Writer out) {
 		def templateText = getTemplateText(viewName)
